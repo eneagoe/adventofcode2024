@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby -w
 
 first = 0
+second = 0
 grid = File.open(ARGV[0]).readlines.map do |line|
   line.chomp.split(//)
 end
@@ -43,3 +44,15 @@ end
 end
 
 puts first
+
+(3...n + 3).each do |i|
+  (3...m + 3).each do |j|
+    next if grid[i][j] != 'A'
+
+    second += 1 if grid[i - 1][j - 1] == 'M' && grid[i - 1][j + 1] == 'S' && grid[i + 1][j - 1] == 'M' && grid[i + 1][j + 1] == 'S'
+    second += 1 if grid[i - 1][j - 1] == 'S' && grid[i - 1][j + 1] == 'S' && grid[i + 1][j - 1] == 'M' && grid[i + 1][j + 1] == 'M'
+    second += 1 if grid[i - 1][j - 1] == 'S' && grid[i - 1][j + 1] == 'M' && grid[i + 1][j - 1] == 'S' && grid[i + 1][j + 1] == 'M'
+    second += 1 if grid[i - 1][j - 1] == 'M' && grid[i - 1][j + 1] == 'M' && grid[i + 1][j - 1] == 'S' && grid[i + 1][j + 1] == 'S'
+  end
+end
+puts second
